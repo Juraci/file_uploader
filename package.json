@@ -9,6 +9,6 @@
   },
   "scripts": {
     "test": "jasmine",
-    "start": "node fileUpload.js"
+    "start": "node app.js"
   }
 }
