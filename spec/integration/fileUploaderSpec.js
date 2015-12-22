@@ -13,6 +13,16 @@ describe('File Uploader', function() {
             } catch(err) {}
         });
 
+        it('should return 201 Created', function(done) {
+            var sampleFile = fileExamples + 'sample.txt';
+            uploadedFile = uploads + 'sample.txt';
+
+            fs.createReadStream(sampleFile).pipe(request.put(baseUrl + 'sample.txt', function(error, response, body) {
+                expect(response.statusCode).toBe(201);
+                done();
+            }));
+        });
+
         it('should upload a text file', function(done) {
             var sampleFile = fileExamples + 'sample.txt';
             uploadedFile = uploads + 'sample.txt';

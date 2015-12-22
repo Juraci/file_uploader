@@ -10,6 +10,7 @@ server.on('request', function(request, response) {
     request.pipe(newFile);
 
     request.on('end', function() {
+        response.writeHead(201);
         response.end('uploaded!');
     });
 });
