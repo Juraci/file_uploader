@@ -5,8 +5,8 @@ var uploads_dir = './uploads/';
 server = http.createServer().listen(8080);
 
 server.on('request', function(request, response) {
-    console.log(request.url);
-    var newFile = fs.createWriteStream(uploads_dir + 'sample.txt');
+    var newFileName = request.url.replace('/', '');
+    var newFile = fs.createWriteStream(uploads_dir + newFileName);
     request.pipe(newFile);
 
     request.on('end', function() {
