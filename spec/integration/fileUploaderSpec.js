@@ -13,7 +13,7 @@ describe('File Uploader', function() {
             } catch(err) {}
         });
 
-        it('should return 201 Created', function(done) {
+        it('returns 201 Created', function(done) {
             var sampleFile = fileExamples + 'sample.txt';
             uploadedFile = uploads + 'sample.txt';
 
@@ -23,7 +23,7 @@ describe('File Uploader', function() {
             }));
         });
 
-        it('should upload a text file', function(done) {
+        it('uploads a text file', function(done) {
             var sampleFile = fileExamples + 'sample.txt';
             uploadedFile = uploads + 'sample.txt';
 
@@ -33,12 +33,22 @@ describe('File Uploader', function() {
             }));
         });
 
-        it('should upload a gif file', function(done) {
+        it('uploads a gif file', function(done) {
             var sampleFile = fileExamples + 'huebr.gif';
             uploadedFile = uploads + 'huebr.gif';
 
             fs.createReadStream(sampleFile).pipe(request.put(baseUrl + 'huebr.gif', function(error, response, body) {
                 expect(fs.statSync(uploadedFile).isFile()).toBe(true);
+                done();
+            }));
+        });
+
+        it('reports the upload progress', function(done) {
+            var sampleFile = fileExamples + 'huebr.gif';
+            uploadedFile = uploads + 'huebr.gif';
+
+            fs.createReadStream(sampleFile).pipe(request.put(baseUrl + 'huebr.gif', function(error, response, body) {
+                expect(body).toMatch(/progress:/);
                 done();
             }));
         });
