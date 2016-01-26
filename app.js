@@ -11,12 +11,6 @@ server.on('request', function(request, response) {
     var uploadedBytes = 0;
 
     response.writeHead(201);
-    // the readable.read() is a method from the stream abstract interface
-    // The read() method pulls some data out of the internal buffer and returns it. If there is no data available, then it will return null
-    request.on('readable', function() {
-        while(null !== request.read()) {}
-    });
-
     // the data event is triggered when the request.read() returns a chunk of data
     request.on('data', function(chunk) {
         uploadedBytes += chunk.length;
